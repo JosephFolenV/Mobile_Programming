@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MP_Intro_Application</string>
+    <string name="textPlus">+</string>
+    <string name="textMinus">-</string>
+    <string name="textTimes">x</string>
+    <string name="textDivide">/</string>
+</resources>
