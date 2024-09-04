@@ -26,12 +26,19 @@ class MainActivity : AppCompatActivity() {
         val tvresult:TextView = findViewById<TextView>(R.id.result)
         operand1 = findViewById<EditText>(R.id.operand1)
         operand2 = findViewById<EditText>(R.id.operand2)
+
         findViewById<Button>(R.id.btnPlus).setOnClickListener{
-//            var op1:String = operand1.text.toString()
             val op1 = getOperand1()
             val op2 = getOperand2()
             result = setResult(op1+op2)
-//            var result:Double = op1dec + op2dec
+            tvresult.text = result.toString()
+
+        }
+
+        findViewById<Button>(R.id.btnMinus).setOnClickListener{
+            val op1 = getOperand1()
+            val op2 = getOperand2()
+            result = setResult(op1-op2)
             tvresult.text = result.toString()
 
         }
