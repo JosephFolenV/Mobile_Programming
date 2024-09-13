@@ -8,100 +8,207 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/tvResult"
+        android:layout_width="354dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.433" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvResult">
+
+        <Button
+            android:id="@+id/seven"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/eight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/nine"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:backgroundTint="@color/black"
+            android:text="9" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="379dp"
-        android:layout_height="50dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="205dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <Button
+            android:id="@+id/four"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/five"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/six"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="6" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginBottom="103dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <Button
-            android:id="@+id/btnPlus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/one"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/textPlus" />
+            android:text="1" />
 
         <Button
-            android:id="@+id/btnMinus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/two"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/textMinus" />
+            android:text="2" />
 
         <Button
-            android:id="@+id/btnTimes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/three"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/textTimes" />
+            android:text="3" />
 
-        <Button
-            android:id="@+id/btnDivide"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/textDivide" />
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/operand2"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnPlus"
+        android:layout_width="98dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="189dp"
+        android:layout_marginEnd="1dp"
+        android:layout_weight="1"
+        android:text="@string/textPlus"
+        app:layout_constraintBottom_toTopOf="@+id/btnMinus"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="467dp" />
+        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/tvResult" />
 
-    <EditText
-        android:id="@+id/operand1"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnMinus"
+        android:layout_width="98dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/operand2"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_weight="1"
+        android:tag="Minus"
+        android:text="@string/textMinus"
+        app:layout_constraintBottom_toTopOf="@+id/btnTimes"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+        app:layout_constraintTop_toBottomOf="@+id/btnPlus" />
 
-    <TextView
-        android:id="@+id/result"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnTimes"
+        android:layout_width="97dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="137dp"
-        android:layout_marginBottom="52dp"
-        android:text="TextView"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_marginStart="1dp"
+        android:layout_weight="1"
+        android:text="@string/textTimes"
+        app:layout_constraintBottom_toTopOf="@+id/btnDivide"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/operand2" />
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/btnMinus" />
+
+    <Button
+        android:id="@+id/btnDivide"
+        android:layout_width="97dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="213dp"
+        android:layout_weight="1"
+        android:text="@string/textDivide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/btnTimes" />
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="103dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="628dp">
+
+        <Button
+            android:id="@+id/equals"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="=" />
+
+        <Button
+            android:id="@+id/point"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="." />
+
+        <Button
+            android:id="@+id/backspace"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Bksp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
