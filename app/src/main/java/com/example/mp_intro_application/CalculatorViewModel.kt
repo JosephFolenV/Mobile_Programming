@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.update
 data class CalculatorUiState(
     val operand1:Double = 0.0,
     val operand2:Double = 0.0,
-    val result:Double = 0.0
+    val result:Double = 0.0,
 )
 
 enum class CalcOperators{
@@ -19,6 +19,7 @@ enum class CalcOperators{
 class CalculatorViewModel(private val calculatorModel: CalculatorModel): ViewModel() {
     private val _uiState = MutableStateFlow(CalculatorUiState())
     val uiState: StateFlow<CalculatorUiState> =_uiState.asStateFlow()
+    var state: String = "s0"
 
     fun updateOperand1(op1: String) {
         try {
@@ -44,7 +45,7 @@ class CalculatorViewModel(private val calculatorModel: CalculatorModel): ViewMod
         }
     }
 
-    fun doCalculation(operation: CalcOperators) {
+    fun doCalculation(operation: CalcOperators, cycle: Boolean) {
         calculatorModel.setOperand1(uiState.value.operand1)
         calculatorModel.setOperand2(uiState.value.operand2)
         val calcResult = when (operation) {
@@ -53,10 +54,18 @@ class CalculatorViewModel(private val calculatorModel: CalculatorModel): ViewMod
             CalcOperators.OP_TIMES -> calculatorModel.multiplyOperands()
             CalcOperators.OP_DIVIDE -> calculatorModel.divideOperands()
         }
-        _uiState.update { currentState ->
-            currentState.copy(
-                result = calcResult
-            )
+        if(cycle) {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    operand1 = calcResult,
+                )
+            }
+        } else {
+            _uiState.update { currentState ->
+                currentState.copy(
+                    result = calcResult,
+                )
+            }
         }
     }
 
@@ -70,7 +79,5 @@ class CalculatorViewModel(private val calculatorModel: CalculatorModel): ViewMod
                 throw IllegalArgumentException("Unknown ViewModel Class")
             }
     }
-
-
 
 }

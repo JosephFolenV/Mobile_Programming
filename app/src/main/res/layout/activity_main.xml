@@ -23,11 +23,12 @@
         android:id="@+id/linearLayout4"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="190dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="2dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toStartOf="@+id/btnPlus"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvResult">
 
@@ -36,7 +37,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/black"
             android:text="7" />
 
         <Button
@@ -44,7 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/black"
             android:text="8" />
 
         <Button
@@ -52,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:backgroundTint="@color/black"
             android:text="9" />
     </LinearLayout>
 
@@ -60,13 +58,11 @@
         android:id="@+id/linearLayout"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="205dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="2dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/btnTimes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
@@ -94,9 +90,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="99dp"
         android:layout_marginBottom="103dp"
         android:orientation="horizontal"
@@ -182,11 +179,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnTimes" />
 
     <LinearLayout
-        android:layout_width="409dp"
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
         android:layout_height="103dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="628dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <Button
             android:id="@+id/equals"
@@ -196,6 +198,13 @@
             android:text="=" />
 
         <Button
+            android:id="@+id/zero"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="0" />
+
+        <Button
             android:id="@+id/point"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -203,12 +212,24 @@
             android:text="." />
 
         <Button
-            android:id="@+id/backspace"
+            android:id="@+id/clear"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Bksp" />
+            android:text="AC" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/backspace"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="45dp"
+        android:text="Bksp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/btnDivide" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

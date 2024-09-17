@@ -1,5 +1,6 @@
 package com.example.mp_intro_application
 
+import android.media.tv.TvRecordingInfo
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -19,6 +20,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     private lateinit var operand1: String
     private lateinit var operand2: String
+    private lateinit var result: String
     private lateinit var tvResult: TextView
     private var currentTv: String = ""
     private val LOGTAG: String = "MainActivity"
@@ -58,7 +60,93 @@ class MainActivity : AppCompatActivity() {
 
     private fun appendToInput(s: String){
         currentTv += s
-        tvResult.setText(currentTv)
+        tvResult.text = currentTv
+    }
+
+    private fun numberButtonLogic(state: String){
+        when(state){
+            "s0" -> {
+                calculatorViewModel.updateOperand1(tvResult.text.toString())
+            }
+            "s1" ->  {
+                calculatorViewModel.updateOperand2(tvResult.text.toString())
+            }
+            "s3","s4" -> {
+                tvResult.text = ""
+                calculatorViewModel.state = "s0"
+            }
+
+        }
+        Log.d(LOGTAG, "State: ")
+        Log.d(LOGTAG, calculatorViewModel.state)
+    }
+
+    private fun opButtonLogic(state: String, operations: ArrayDeque<String>, newOperator: String, tvResult: TextView){
+        when(state){
+            "s0" -> {
+                operations.addLast(newOperator)
+                Log.d(LOGTAG, operations.toString())
+                tvResult.text = ""
+                calculatorViewModel.state = "s1"
+            }
+            "s1" ->  {
+                tvResult.text = ""
+                operations.addLast(newOperator)
+                when(operations.removeFirst()){
+                    "+" -> calculatorViewModel.doCalculation(CalcOperators.OP_PLUS, true)
+                    "-" -> calculatorViewModel.doCalculation(CalcOperators.OP_MINUS, true)
+                    "*" -> calculatorViewModel.doCalculation(CalcOperators.OP_TIMES, true)
+                    "/" -> calculatorViewModel.doCalculation(CalcOperators.OP_DIVIDE, true)
+                }
+            }
+            "s3","s4" -> {
+                calculatorViewModel.updateOperand1(tvResult.toString())
+                operations.addLast(newOperator)
+                tvResult.text = ""
+                calculatorViewModel.state = "s1"
+
+            }
+
+        }
+        currentTv = ""
+        Log.d(LOGTAG, "State: ")
+        Log.d(LOGTAG, calculatorViewModel.state)
+    }
+    private fun equalsLogic(state: String, operations: ArrayDeque<String>, tvResult: TextView){
+        when(state){
+            "s0" -> {
+                tvResult.text = ""
+                tvResult.text = operand1
+                calculatorViewModel.state = "s3"
+            }
+            "s1" -> {
+
+                if(!(operations.isEmpty())){
+                    Log.d(LOGTAG, "Operation found")
+                    when (operations.removeFirst()) {
+                        "+" -> {
+                            calculatorViewModel.doCalculation(CalcOperators.OP_PLUS, false)
+                            calculatorViewModel.state = "s4"
+                        }
+                        "-" -> calculatorViewModel.doCalculation(CalcOperators.OP_MINUS, false)
+                        "*" -> calculatorViewModel.doCalculation(CalcOperators.OP_TIMES, false)
+                        "/" -> calculatorViewModel.doCalculation(CalcOperators.OP_DIVIDE, false)
+                    }
+                }
+            }
+        }
+        currentTv = ""
+        Log.d(LOGTAG, "State: ")
+        Log.d(LOGTAG, calculatorViewModel.state)
+    }
+
+    private fun printAll3(){
+        Log.d(LOGTAG, "Op1:")
+        Log.d(LOGTAG, operand1)
+        Log.d(LOGTAG, "Op2:")
+        Log.d(LOGTAG, operand2)
+        Log.d(LOGTAG, "Res: ")
+        Log.d(LOGTAG, result)
     }
 
 
@@ -71,57 +159,108 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-//        etOperand1 = findViewById<EditText>(R.id.operand1)
-//        etOperand1.addTextChangedListener { charSequence ->
-//            calculatorViewModel.updateOperand1(charSequence.toString())
-//        }
-//        etOperand2 = findViewById<EditText>(R.id.operand2)
-//        etOperand2.addTextChangedListener { charSequence ->
-//            calculatorViewModel.updateOperand2(charSequence.toString())
-//        }
         tvResult = findViewById(R.id.tvResult)
+        val operations: ArrayDeque<String> = ArrayDeque()
 
-        findViewById<Button>(R.id.one).setOnClickListener{ appendToInput("1") }
-        findViewById<Button>(R.id.two).setOnClickListener{ appendToInput("2") }
-        findViewById<Button>(R.id.three).setOnClickListener{ appendToInput("3") }
-        findViewById<Button>(R.id.four).setOnClickListener{ appendToInput("4") }
-        findViewById<Button>(R.id.five).setOnClickListener{ appendToInput("5") }
-        findViewById<Button>(R.id.six).setOnClickListener{ appendToInput("6") }
-        findViewById<Button>(R.id.seven).setOnClickListener{ appendToInput("7") }
-        findViewById<Button>(R.id.eight).setOnClickListener{ appendToInput("8") }
-        findViewById<Button>(R.id.nine).setOnClickListener{ appendToInput("9") }
-
-
-
-
-
-
+        findViewById<Button>(R.id.one).setOnClickListener{
+            appendToInput("1")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.two).setOnClickListener{
+            appendToInput("2")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.three).setOnClickListener{
+            appendToInput("3")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.four).setOnClickListener{
+            appendToInput("4")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.five).setOnClickListener{
+            appendToInput("5")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.six).setOnClickListener{
+            appendToInput("6")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.seven).setOnClickListener{
+            appendToInput("7")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.eight).setOnClickListener{
+            appendToInput("8")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.nine).setOnClickListener{
+            appendToInput("9")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.zero).setOnClickListener{
+            appendToInput("0")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
+        findViewById<Button>(R.id.point).setOnClickListener{
+            appendToInput(".")
+            numberButtonLogic(calculatorViewModel.state)
+            printAll3()
+        }
 
 
 
         findViewById<Button>(R.id.btnPlus).setOnClickListener {
-            operand1 = tvResult.toString()
-            Log.d(LOGTAG, "operand 1 =$tvResult")
-            calculatorViewModel.doCalculation(CalcOperators.OP_PLUS)
+            opButtonLogic(calculatorViewModel.state, operations, "+", tvResult)
+
+
         }
         findViewById<Button>(R.id.btnMinus).setOnClickListener {
-            calculatorViewModel.doCalculation(CalcOperators.OP_MINUS)
+            opButtonLogic(calculatorViewModel.state, operations, "-", tvResult)
+
         }
         findViewById<Button>(R.id.btnTimes).setOnClickListener {
-            calculatorViewModel.doCalculation(CalcOperators.OP_TIMES)
+            opButtonLogic(calculatorViewModel.state, operations, "*", tvResult)
         }
         findViewById<Button>(R.id.btnDivide).setOnClickListener {
-            calculatorViewModel.doCalculation(CalcOperators.OP_DIVIDE)
+            opButtonLogic(calculatorViewModel.state, operations, "/", tvResult)
         }
 
+        findViewById<Button>(R.id.equals).setOnClickListener {
+            equalsLogic(calculatorViewModel.state, operations, tvResult)
+            tvResult.text = result
+        }
+
+        findViewById<Button>(R.id.clear).setOnClickListener{
+            tvResult.text = ""
+            calculatorViewModel.updateOperand1("0")
+            calculatorViewModel.updateOperand2("0")
+            calculatorViewModel.state = "s0"
+        }
+
+        findViewById<Button>(R.id.backspace).setOnClickListener{
+            if((tvResult.text.toString()).isNotEmpty()){
+                tvResult.text = (tvResult.text.toString()).substring(0, (tvResult.text.toString()).length - 1)
+            }
+            numberButtonLogic(calculatorViewModel.state)
+        }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 calculatorViewModel.uiState.collect { state ->
-                    // Update UI elements
-//                    etOperand1.setText(state.operand1.toString())
-//                    etOperand2.setText(state.operand2.toString())
-                    tvResult.setText(state.result.toString())
+                    result = state.result.toString()
+                    operand1 = state.operand1.toString()
+                    operand2 = state.operand2.toString()
                 }
             }
         }
